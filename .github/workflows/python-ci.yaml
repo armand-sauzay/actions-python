@@ -1,0 +1,23 @@
+name: Python CI
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      executable:
+        type: string
+        required: false
+        default: "python"
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: armand-sauzay/actions-python/lint@initial-repository-setup
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: armand-sauzay/actions-python/test@initial-repository-setup

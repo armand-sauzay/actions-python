@@ -1,0 +1,40 @@
+name: Python Lint
+description: GitHub Action that lints a Python based repository
+inputs:
+  checkout-repo:
+    required: false
+    description: Perform checkout as first step of action
+    default: "true"
+  github-token:
+    required: true
+    description: GitHub token that can checkout the repository. e.g. 'secrets.GITHUB_TOKEN'
+    default: ${{ github.token }}
+  extra-args:
+    required: false
+    description: Extra args for pre-commit
+    default: ""
+runs:
+  using: composite
+  steps:
+    - name: Setup python
+      # this will use by default the .python-version of the repository that uses
+      # this action
+      uses: actions/setup-python@v4
+    - name: Checkout
+      uses: actions/checkout@v3
+      if: inputs.checkout-repo == 'true'
+      with:
+        fetch-depth: 0
+    - name: Install poetry
+      if: hashFiles('pyproject.toml') != ''
+      uses: armand-sauzay/actions-installs/poetry@initial-repo-setup
+    - name: Install poetry dependencies
+      if: hashFiles('pyproject.toml') != ''
+      shell: bash
+      run: |
+        poetry install
+    - name: Install pip dependencies
+      if: hashFiles('pyproject.toml') == ''
+      shell: bash
+      run: pip install -e .
+    - uses: pre-commit/action@v3.0.0
