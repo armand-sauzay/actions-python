@@ -1,0 +1,40 @@
+site_name: Actions Python
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to dark mode
+  features:
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github-alt
+repo_name: armand-sauzay/actions-python
+repo_url: https://github.com/armand-sauzay/actions-python
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/armand-sauzay
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/armandsauzay
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/armand-sauzay
+    - icon: fontawesome/brands/dev
+      link: https://dev.to/armandsauzay
+    - icon: fontawesome/brands/medium
+      link: https://medium.com/@armand-sauzay
+    - icon: fontawesome/solid/globe
+      link: https://tiangolo.com
