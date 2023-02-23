@@ -1,16 +1,25 @@
 # Actions Python
 
-** This project is forked from open-turo/actions-python **
+<p align="center">
+    <b align="center">
+        This project is forked from open-turo/actions-python
+    </b>
+    <p align="center">
+    GitHub Action for `python` based repositories. It uses `pip` as package manager.
+    </p>
+</p>
 
-GitHub Action for `python` based repositories. It uses `pip` as package manager.
-
-[![Release](https://img.shields.io/github/v/release/armand-sauzay/actions-python)](https://github.com/armand-sauzay/actions-python/releases/)
-[![Tests pass/fail](https://img.shields.io/github/workflow/status/armand-sauzay/actions-python/CI)](https://github.com/armand-sauzay/actions-python/actions/)
-[![License](https://img.shields.io/github/license/armand-sauzay/actions-python)](./LICENSE)
-[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/dwyl/esta/issues)
-[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
-[![Conventional commits](https://img.shields.io/badge/conventional%20commits-1.0.2-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+<p align="center">
+    <a href="https://github.com/armand-sauzay/actions-python/actions/workflows/ci.yaml">
+        <img src="https://github.com/armand-sauzay/actions-python/actions/workflows/ci.yaml/badge.svg" alt="CI">
+    </a>
+    <a href="https://github.com/armand-sauzay/actions-python/actions/workflows/release.yaml">
+        <img src="https://github.com/armand-sauzay/actions-python/actions/workflows/release.yaml/badge.svg?branch=main" alt="Release">
+    </a>
+    <a href="https://github.com/armand-sauzay/actions-python/releases">
+        <img src="https://img.shields.io/github/v/release/armand-sauzay/actions-python?include_prereleases" alt="Latest Version">
+    </a>
+</p>
 
 ## Actions
 
@@ -18,7 +27,7 @@ GitHub Action for `python` based repositories. It uses `pip` as package manager.
 
 Lint will run pre-commit linters against the consumer repository, optionally checking out to to the consumer repository.
 
-See usage [here](./lint/#usage).
+See usage [here](./lint#usage).
 
 Documentation is found [here](./lint).
 
