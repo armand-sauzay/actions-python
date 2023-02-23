@@ -27,9 +27,9 @@
 
 ---
 
-**Documentation:** https://armand-sauzay.github.io/actions-python/
+**Documentation**: <a href="https://armand-sauzay.github.io/actions-python">https://armand-sauzay.github.io/actions-python/</a>
 
-**Source Code:** https://github.com/armand-sauzay/actions-python
+**Source Code**: <a href="https://github.com/armand-sauzay/actions-python">https://github.com/armand-sauzay/actions-python</a>
 
 ---
 
