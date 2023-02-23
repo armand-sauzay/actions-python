@@ -14,10 +14,10 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: armand-sauzay/actions-python/lint@initial-repository-setup
+      - uses: armand-sauzay/actions-python/lint@v1
 
   test:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - uses: armand-sauzay/actions-python/test@initial-repository-setup
+      - uses: armand-sauzay/actions-python/test@v1
