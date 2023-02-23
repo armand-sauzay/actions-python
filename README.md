@@ -1,4 +1,6 @@
-# `armand-sauzay/actions-python`
+<p align="center">
+  <a href="https://armand-sauzay.github.io/actions-python/"><img src="docs/docs/logo.svg" alt="Actions Python" width="700" height="100"></a>
+</p>
 
 <p align="center">
     <b align="center">
