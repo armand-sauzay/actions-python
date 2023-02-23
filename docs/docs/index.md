@@ -1,6 +1,10 @@
 # Actions Python
 
 <p align="center">
+  <a href="https://armand-sauzay.github.io/actions-python/"><img src="logo.svg" alt="Actions Python" width="700" height="100"></a>
+</p>
+
+<p align="center">
     <b align="center">
         This project is forked from open-turo/actions-python
     </b>
