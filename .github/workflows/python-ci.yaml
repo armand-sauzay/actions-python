@@ -14,10 +14,10 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: armand-sauzay/actions-python/lint@v1
+      - uses: armand-sauzay/actions-python/lint@change-poetry-install
 
   test:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - uses: armand-sauzay/actions-python/test@v1
+      - uses: armand-sauzay/actions-python/test@change-poetry-install
