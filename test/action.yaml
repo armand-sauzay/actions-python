@@ -35,7 +35,8 @@ runs:
     # If we do have a poetry.lock, we use a poetry based workflow
     - name: Install poetry
       if: hashFiles('poetry.lock') != ''
-      uses: armand-sauzay/actions-installs/poetry@initial-repo-setup
+      shell: bash
+      run: pipx install poetry
     - name: Install poetry dependencies
       if: hashFiles('poetry.lock') != ''
       shell: bash

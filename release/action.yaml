@@ -45,7 +45,8 @@ runs:
     - name: Setup python
       uses: actions/setup-python@v4
     - name: Install poetry
-      uses: armand-sauzay/actions-installs/poetry@initial-repo-setup
+      shell: bash
+      run: pipx install poetry
     - name: Version
       id: version
       uses: cycjimmy/semantic-release-action@v3
