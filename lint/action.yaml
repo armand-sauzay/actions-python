@@ -16,10 +16,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Setup python
-      # this will use by default the .python-version of the repository that uses
-      # this action
-      uses: actions/setup-python@v4
     - name: Checkout
       uses: actions/checkout@v3
       if: inputs.checkout-repo == 'true'
@@ -29,6 +25,16 @@ runs:
       if: hashFiles('pyproject.toml') != ''
       shell: bash
       run: pipx install poetry
+    - name: Setup python
+      # this will use by default the .python-version of your repo
+      if: hashFiles('poetry.lock') != ''
+      uses: actions/setup-python@v4
+      with:
+        cache: "poetry"
+    - name: Setup python
+      # this will use by default the .python-version of your repo
+      if: hashFiles('poetry.lock') == ''
+      uses: actions/setup-python@v4
     - name: Install poetry dependencies
       if: hashFiles('pyproject.toml') != ''
       shell: bash

@@ -42,11 +42,19 @@ runs:
       with:
         fetch-depth: 0
         persist-credentials: false
-    - name: Setup python
-      uses: actions/setup-python@v4
     - name: Install poetry
       shell: bash
       run: pipx install poetry
+    - name: Setup python
+      # this will use by default the .python-version of your repo
+      if: hashFiles('poetry.lock') != ''
+      uses: actions/setup-python@v4
+      with:
+        cache: "poetry"
+    - name: Setup python
+      # this will use by default the .python-version of your repo
+      if: hashFiles('poetry.lock') == ''
+      uses: actions/setup-python@v4
     - name: Version
       id: version
       uses: cycjimmy/semantic-release-action@v3
