@@ -27,7 +27,8 @@ runs:
         fetch-depth: 0
     - name: Install poetry
       if: hashFiles('pyproject.toml') != ''
-      uses: armand-sauzay/actions-installs/poetry@initial-repo-setup
+      shell: bash
+      run: pipx install poetry
     - name: Install poetry dependencies
       if: hashFiles('pyproject.toml') != ''
       shell: bash

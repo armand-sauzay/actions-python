@@ -9,7 +9,8 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: armand-sauzay/actions-installs/poetry@initial-repo-setup
+      - name: Install poetry
+        run: pipx install poetry
       - uses: actions/checkout@v3
       - uses: pre-commit/action@v3.0.0
 
