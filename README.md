@@ -19,7 +19,7 @@
         <img src="https://github.com/armand-sauzay/actions-python/actions/workflows/release.yaml/badge.svg?branch=main" alt="Release">
     </a>
     <a href="https://github.com/armand-sauzay/actions-python/releases">
-        <img src="https://img.shields.io/github/v/release/armand-sauzay/actions-python?include_prereleases" alt="Latest Version">
+        <img src="https://img.shields.io/github/v/tag/armand-sauzay/actions-python?sort=semver" alt="Version">
     </a>
 </p>
 
