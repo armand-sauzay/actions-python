@@ -8,7 +8,7 @@ on:
 
 jobs:
   CI:
-    uses: armand-sauzay/workflows/.github/workflows/python-ci.yaml@change-poetry-install
+    uses: armand-sauzay/workflows/.github/workflows/python-ci.yaml@v1
   RELEASE:
     name: Release
     needs: [CI]
@@ -17,5 +17,5 @@ jobs:
       new-release-published: ${{ steps.release.outputs.new-release-published }}
       new-release-version: ${{ steps.release.outputs.new-release-version }}
     steps:
-      - uses: armand-sauzay/actions-python/release@change-poetry-install
+      - uses: armand-sauzay/actions-python/release@v1
         id: release
