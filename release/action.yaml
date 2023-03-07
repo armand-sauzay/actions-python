@@ -63,8 +63,6 @@ runs:
       uses: cycjimmy/semantic-release-action@v3
       with:
         dry_run: true
-        branches: |
-          ['${{ github.ref_name	}}']
         extra_plugins: ${{ inputs.extra-plugins }}
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
@@ -79,7 +77,10 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github-token }}
       run: |
         # Use poetry to bump the version in pyproject.toml
-        poetry version "${{ steps.version.outputs.new_release_version }}"
+        PACKAGE_VERSION="${{ steps.version.outputs.new_release_version }}"
+        #modify the package version in case of a pre-release to abide by PEP440
+        PACKAGE_VERSION=$(echo $PACKAGE_VERSION | sed 's/-.*\./rc/')
+        poetry version $PACKAGE_VERSION
 
         # Specify the user name and email which is required to commit with a token auth
         git config user.email "${{ inputs.git-user-name }}"
@@ -104,10 +105,6 @@ runs:
 
         # Nice logging, generate success exit code from this run step
         echo "::notice::Version successfully updated in pyproject.toml to ${{ steps.version.outputs.new_release_version }}."
-    - name: Build project for distribution
-      if: inputs.pypi-token
-      shell: bash
-      run: poetry build
     - name: Release
       id: release
       if: steps.version.outputs.new_release_published == 'true'
@@ -117,8 +114,12 @@ runs:
         extra_plugins: ${{ inputs.extra-plugins }}
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
+    - name: Build project for distribution
+      if: (inputs.pypi-token && steps.version.outputs.new_release_published == 'true')
+      shell: bash
+      run: poetry build
     - name: Publish to PyPI
-      if: inputs.pypi-token
+      if: (inputs.pypi-token && steps.version.outputs.new_release_published == 'true')
       shell: bash
       env:
         POETRY_PYPI_TOKEN_PYPI: ${{ inputs.pypi-token }}
