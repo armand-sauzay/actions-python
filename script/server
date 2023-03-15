@@ -1,0 +1,11 @@
+#!/bin/bash
+
+source script/util
+if [ ! -d "venv" ]; then
+    ./script/bootstrap
+fi
+
+source venv/bin/activate
+
+log_yellow "🔧  starting server: Starting mkdocs server..."
+mkdocs serve -f docs/mkdocs.yaml

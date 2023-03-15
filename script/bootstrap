@@ -1,0 +1,15 @@
+#!/bin/bash
+source script/util
+
+log_yellow "🔧  bootstrapping: Installing dependencies..."
+
+echo "Creating virtual environment..."
+python3 -m venv venv
+
+echo "Activating virtual environment..."
+source venv/bin/activate
+
+echo "Installing dependencies..."
+pip install -r docs/requirements.txt
+
+log_green "✅  bootstrapping: Done"
