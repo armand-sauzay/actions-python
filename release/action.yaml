@@ -26,7 +26,7 @@ inputs:
   python-version:
     required: false
     description: Python version to install on the github runner.
-    default: 3.10.4
+    default: ""
 
 outputs:
   new-release-published:
@@ -54,10 +54,13 @@ runs:
       uses: actions/setup-python@v4
       with:
         cache: "poetry"
+        python-version: ${{ inputs.python-version }}
     - name: Setup python
       # this will use by default the .python-version of your repo
       if: hashFiles('poetry.lock') == ''
       uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
     - name: Version
       id: version
       uses: cycjimmy/semantic-release-action@v3
