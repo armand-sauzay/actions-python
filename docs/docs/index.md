@@ -35,29 +35,29 @@
 
 ## Actions
 
-### action: [`lint`](./lint)
+### action: [`lint`](./actions/lint)
 
 Lint will run pre-commit linters against the consumer repository, optionally checking out to to the consumer repository.
 
-See usage [here](./lint#usage).
+See usage [here](./actions/lint#usage).
 
-Documentation is found [here](./lint).
+Documentation is found [here](./actions/lint).
 
-### action: [`test`](./test)
+### action: [`test`](./actions/test)
 
 Test will run tests in the consumer repository using [pytest](https://github.com/pytest-dev/pytest). This action will also check out the repository if `checkout-repo` is passed, as well as `pip install .[dev]` and `pip install .[test]` for dependencies.
 
-See usage [here](./test#usage).
+See usage [here](./actions/test#usage).
 
-Documentation is found [here](./test).
+Documentation is found [here](./actions/test).
 
-### action: [`release`](./release)
+### action: [`release`](./actions/release)
 
 Release will optionally checkout the consumer repository and attempt a [Semantic Release](https://semantic-release.gitbook.io/semantic-release/usage/configuration) using the root level configuration file (e.g. .releaserc.json) indicating branches and plugins to use to facilitate the release.
 
-See usage [here](./release#usage).
+See usage [here](./actions/release#usage).
 
-Documentation is found [here](./release).
+Documentation is found [here](./actions/release).
 
 ## Get Help
 

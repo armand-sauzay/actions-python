@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#creates bash utility functions
+#source this file to use the functions
+
+function log_green {
+    echo -e "\033[32m$1\033[0m"
+}
+
+function log_red {
+    echo -e "\033[31m$1\033[0m"
+}
+
+function log_yellow {
+    echo -e "\033[33m$1\033[0m"
+}
+
+function run_with_progress {
+    local SETTINGS=$(stty -g)
+    stty -echo
+
+    local PROGRESS="⣾⣽⣻⢿⡿⣟⣯⣷"
+    local PROGRESS_LENGTH=${#PROGRESS}
+    local PROGRESS_INDEX=0
+
+    local PID=$1
+    local MESSAGE=$2
+
+    while kill -0 $PID 2>/dev/null; do
+        local PROGRESS_CHAR=${PROGRESS:$PROGRESS_INDEX:1}
+        printf "\r$MESSAGE $PROGRESS_CHAR"
+        ((PROGRESS_INDEX=PROGRESS_INDEX+1))
+        ((PROGRESS_INDEX=PROGRESS_INDEX%PROGRESS_LENGTH))
+        sleep 0.1
+    done
+
+    stty $SETTINGS
+    printf "\r$MESSAGE \033[32m✓\033[0m\n"
+}

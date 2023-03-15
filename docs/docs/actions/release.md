@@ -1,5 +1,8 @@
 # Release
 
+_If you want more details on how to add this action to your repository, please
+see the [setup](../setup.md) documentation._
+
 ## Description
 
 GitHub Action that publishes a new release.

@@ -1,0 +1,18 @@
+/* for the class announce
+    text should be blank twitter emoji should be blue
+*/
+
+a.announce-link:link,
+a.announce-link:visited {
+  color: #fff;
+  text-decoration: none;
+}
+
+a.announce-link:hover,
+a.announce-link:active {
+  color: var(--md-accent-fg-color);
+}
+
+.twitter {
+  color: #00acee;
+}

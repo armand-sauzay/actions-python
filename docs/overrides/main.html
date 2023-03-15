@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+<!-- Announcement bar -->
+{% block announce %}
+<div class="announce">
+  <a href="https://twitter.com/armandsauzay" class="announce-link">
+    For updates follow
+    <strong>@armandsauzay</strong>
+    on
+    <span class="twemoji twitter">
+      {% include ".icons/fontawesome/brands/twitter.svg" %}
+    </span>
+    <strong>Twitter</strong>
+  </a>
+</div>
+
+{% endblock %}
+
+<!-- Theme-related JavaScript -->
+{% block scripts %} {{ super() }} {% endblock %}

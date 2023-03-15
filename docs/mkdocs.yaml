@@ -20,12 +20,38 @@ theme:
     - search.suggest
     - search.highlight
     - content.tabs.link
+    - content.code.copy
   icon:
     repo: fontawesome/brands/github-alt
   logo: favicon.svg
   favicon: favicon.svg
+  custom_dir: overrides
 repo_name: armand-sauzay/actions-python
 repo_url: https://github.com/armand-sauzay/actions-python
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+extra_css:
+  - css/extra.css
+nav:
+  - Actions Python: index.md
+  - Get started:
+      - Overview: setup.md
+      - Files needed:
+          - .commitlintrc.yaml: files/commitlintrc.md
+          - .pre-commit-config.yaml: files/pre-commit-config.md
+          - .releaserc.json: files/releaserc.md
+  - Actions:
+      - Lint: actions/lint.md
+      - Test: actions/test.md
+      - Release: actions/release.md
 extra:
   social:
     - icon: fontawesome/brands/github-alt
@@ -40,3 +66,21 @@ extra:
       link: https://medium.com/@armand-sauzay
     - icon: fontawesome/solid/globe
       link: https://armand-sauzay.github.io/
+  analytics:
+    provider: google
+    property: G-JJWRNMYPFH
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+            Help us improve this page <a href="https://docs.google.com/forms/d/e/1FAIpQLSdq-1iiqF_ElLmqd7KE7T-g4MkpPT7xCH85DlXxz40hKMkVrA/viewform" target="_blank" rel="noopener">telling us what we're missing</a>.
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+            Thanks for your feedback! Help us improve this page by
+            using our <a href="https://docs.google.com/forms/d/e/1FAIpQLSdq-1iiqF_ElLmqd7KE7T-g4MkpPT7xCH85DlXxz40hKMkVrA/viewform" target="_blank" rel="noopener">feedback form</a>.
