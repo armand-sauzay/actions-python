@@ -5,6 +5,10 @@ inputs:
     required: true
     description: GitHub token that can checkout the repository. e.g. 'secrets.GITHUB_TOKEN'
     default: ${{ github.token }}
+  python-version:
+    required: false
+    description: Python version to install on the github runner.
+    default: ""
   test-flags:
     required: false
     description: Flags and args for test command
@@ -27,10 +31,13 @@ runs:
       uses: actions/setup-python@v4
       with:
         cache: "poetry"
+        python-version: ${{ inputs.python-version }}
     - name: Setup python
       # this will use by default the .python-version of your repo
       if: hashFiles('poetry.lock') == ''
       uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
     - name: Install pip dependencies
       if: hashFiles('poetry.lock') == ''
       shell: bash
