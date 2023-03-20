@@ -1,4 +1,18 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"]
+  "extends": [
+    "config:base",
+    "group:allNonMajor",
+    ":separateMultipleMajorReleases",
+    ":automergeMinor",
+    ":automergePr",
+    ":automergeRequireAllStatusChecks",
+    ":ignoreUnstable",
+    ":enableVulnerabilityAlertsWithLabel(security)",
+    ":rebaseStalePrs",
+    ":prHourlyLimitNone"
+  ],
+  "pre-commit": {
+    "enabled": true
+  },
+  "reviewersFromCodeOwners": true
 }
