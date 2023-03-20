@@ -4,7 +4,12 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      executable:
+        type: string
+        required: false
+        default: "python"
 
 jobs:
   CI:
