@@ -89,7 +89,7 @@ runs:
         # Specify the user name and email which is required to commit with a token auth
         git config user.email "${{ inputs.git-user-name }}"
         git config user.name "${{ inputs.git-user-email }}"
-        git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
+        git config --global url.https://$GITHUB_TOKEN@github.com/.insteadOf https://github.com/
 
         # Commit the bumped project version with a non-semver chore: commit message
         git add pyproject.toml
