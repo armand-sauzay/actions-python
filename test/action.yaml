@@ -20,47 +20,37 @@ runs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
+
     # If we do have a poetry.lock, we use a poetry based workflow
+    # See README.md for more information on what is supported
     - name: Install poetry
       if: hashFiles('poetry.lock') != ''
       shell: bash
       run: pipx install poetry
     - name: Setup python
-      # this will use by default the .python-version of your repo
       if: hashFiles('poetry.lock') != ''
       uses: actions/setup-python@v4
       with:
         cache: "poetry"
         python-version: ${{ inputs.python-version }}
+    - run: poetry install
+      shell: bash
+    - run: poetry run pytest
+      shell: bash
+
+    # If we don't have a poetry.lock, we use a pip based workflow
     - name: Setup python
-      # this will use by default the .python-version of your repo
       if: hashFiles('poetry.lock') == ''
       uses: actions/setup-python@v4
       with:
         python-version: ${{ inputs.python-version }}
+        cache: "pip"
     - name: Install pip dependencies
       if: hashFiles('poetry.lock') == ''
       shell: bash
       run: |
-        # Install the current package as editable
-        pip install -e .
-        # Install the extras="dev" setup.py dependencies
-        pip install -e ".[dev]" || true
-        # Install the extras="test" setup.py dependencies
-        pip install -e ".[test]" || true
+        pip install -r requirements.txt
     - name: Run pip tests
       if: hashFiles('poetry.lock') == ''
       shell: bash
       run: pytest ${{ inputs.test-flags }}
-    - name: Install poetry dependencies
-      if: hashFiles('poetry.lock') != ''
-      shell: bash
-      run: |
-        poetry install --extras dev || echo "No dev extras"
-        poetry install --with dev || echo "No dev dependency group"
-        poetry install --extras test || echo "No test extras"
-        poetry install --with test || echo "No test dependency group"
-    - name: Run poetry tests
-      if: hashFiles('poetry.lock') != ''
-      shell: bash
-      run: poetry run pytest ${{ inputs.test-flags }}

@@ -7,7 +7,7 @@
         This project is forked from open-turo/actions-python
     </b>
     <p align="center">
-    GitHub Action for `python` based repositories. It uses `pip` as package manager.
+    GitHub Action for `python` based repositories. It supports `pip` and `poetry` as package manager.
     </p>
 </p>
 

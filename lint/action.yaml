@@ -16,7 +16,7 @@ inputs:
   python-version:
     required: false
     description: Python version to install on the github runner.
-    default: ""
+    default: "3.12"
 
 runs:
   using: composite
@@ -26,30 +26,11 @@ runs:
       if: inputs.checkout-repo == 'true'
       with:
         fetch-depth: 0
-    - name: Install poetry
-      if: hashFiles('pyproject.toml') != ''
-      shell: bash
-      run: pipx install poetry
     - name: Setup python
-      # this will use by default the .python-version of your repo
       if: hashFiles('poetry.lock') != ''
       uses: actions/setup-python@v4
       with:
-        cache: "poetry"
         python-version: ${{ inputs.python-version }}
-    - name: Setup python
-      # this will use by default the .python-version of your repo
-      if: hashFiles('poetry.lock') == ''
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ inputs.python-version }}
-    - name: Install poetry dependencies
-      if: hashFiles('pyproject.toml') != ''
-      shell: bash
-      run: |
-        poetry install
-    - name: Install pip dependencies
-      if: hashFiles('pyproject.toml') == ''
-      shell: bash
-      run: pip install -e .
     - uses: pre-commit/action@v3.0.0
+      with:
+        extra_args: ${{ inputs.extra-args }}
