@@ -22,16 +22,36 @@ runs:
         fetch-depth: 0
 
     #cache installation of poetry
-    #We install python with pip cache
-    - name: Setup python
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ inputs.python-version }}
-        cache: "pip"
-    - name: Install Poetry
-      shell: bash
+    - name: Setup Local Variables
+      id: variable-setup
+      if: hashFiles('poetry.lock') != ''
       run: |
-        pip install poetry
+        echo "pipx-home=$PIPX_HOME" >> $GITHUB_OUTPUT
+        echo "pipx-bin-dir=$PIPX_BIN_DIR" >> $GITHUB_OUTPUT
+        echo "cache-key-pipx=pipx-${{ runner.os }}-${{ inputs.python-version }}-poetry" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Cache pipx
+      id: cache-pipx
+      if: hashFiles('poetry.lock') != ''
+      uses: actions/cache@v3
+      with:
+        path: |
+          ${{ steps.variable-setup.outputs.pipx-home }}
+          ${{ steps.variable-setup.outputs.pipx-bin-dir }}
+        key: ${{ steps.variable-setup.outputs.cache-key-pipx }}
+
+    - name: Install poetry
+      if: hashFiles('poetry.lock') != '' && steps.cache-pipx.outputs.cache-hit != 'true'
+      shell: bash
+      run: pipx install poetry
+
+    - name: Ensure Pipx Paths
+      if: hashFiles('poetry.lock') != ''
+      run: |
+        pipx ensurepath
+        pipx list
+      shell: bash
       # If we do have a poetry.lock, we use a poetry based workflow
       # See README.md for more information on what is supported
     - name: Setup python
