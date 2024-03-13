@@ -33,6 +33,8 @@ runs:
       if: steps.cache-poetry.outputs.cache-hit != 'true'
       shell: bash
       run: |
+        mkdir -p ${{ github.workspace }}/pipx_cache/home
+        mkdir -p ${{ github.workspace }}/pipx_cache/bin
         sudo cp -r $PIPX_HOME ${{ github.workspace }}/pipx_cache/home
         sudo cp -r $PIPX_BIN_DIR ${{ github.workspace }}/pipx_cache/bin
 
@@ -40,8 +42,6 @@ runs:
       if: steps.cache-poetry.outputs.cache-hit == 'true'
       shell: bash
       run: |
-        mkdir -p ${{ github.workspace }}/pipx_cache/home
-        mkdir -p ${{ github.workspace }}/pipx_cache/bin
         sudo cp -r ${{ github.workspace }}/pipx_cache/home/* $PIPX_HOME
         sudo cp -r ${{ github.workspace }}/pipx_cache/bin/* $PIPX_BIN_DIR
         pipx ensurepath
