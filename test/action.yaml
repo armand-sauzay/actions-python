@@ -22,36 +22,40 @@ runs:
         fetch-depth: 0
 
     #cache installation of poetry
-    - name: Setup Local Variables
-      id: variable-setup
-      if: hashFiles('poetry.lock') != ''
-      run: |
-        echo "pipx-home=$PIPX_HOME" >> $GITHUB_OUTPUT
-        echo "pipx-bin-dir=$PIPX_BIN_DIR" >> $GITHUB_OUTPUT
-        echo "cache-key-pipx=pipx-${{ runner.os }}-${{ inputs.python-version }}-poetry" >> $GITHUB_OUTPUT
-      shell: bash
-
-    - name: Cache pipx
-      id: cache-pipx
-      if: hashFiles('poetry.lock') != ''
-      uses: actions/cache@v3
+    - name: Restore Poetry from Cache
+      id: cache-poetry
+      uses: actions/cache@v4
       with:
-        path: |
-          ${{ steps.variable-setup.outputs.pipx-home }}
-          ${{ steps.variable-setup.outputs.pipx-bin-dir }}
-        key: ${{ steps.variable-setup.outputs.cache-key-pipx }}
+        path: ${{ github.workspace }}/pipx_cache
+        key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
 
-    - name: Install poetry
-      if: hashFiles('poetry.lock') != '' && steps.cache-pipx.outputs.cache-hit != 'true'
+    - name: Copy pipx installs to workspace if not cached
+      if: steps.cache-poetry.outputs.cache-hit != 'true'
       shell: bash
-      run: pipx install poetry
+      run: |
+        sudo cp -r $PIPX_HOME ${{ github.workspace }}/pipx_cache/home
+        sudo cp -r $PIPX_BIN_DIR ${{ github.workspace }}/pipx_cache/bin
 
+    - name: Copy pipx installs back if cached
+      if: steps.cache-poetry.outputs.cache-hit == 'true'
+      shell: bash
+      run: |
+        mkdir -p ${{ github.workspace }}/pipx_cache/home
+        mkdir -p ${{ github.workspace }}/pipx_cache/bin
+        sudo cp -r ${{ github.workspace }}/pipx_cache/home/* $PIPX_HOME
+        sudo cp -r ${{ github.workspace }}/pipx_cache/bin/* $PIPX_BIN_DIR
+        pipx ensurepath
+        pipx list
     - name: Ensure Pipx Paths
+      shell: bash
       if: hashFiles('poetry.lock') != ''
       run: |
         pipx ensurepath
         pipx list
+    - name: Install poetry
+      if: hashFiles('poetry.lock') != '' && steps.cache-pipx.outputs.cache-hit != 'true'
       shell: bash
+      run: pipx install poetry
       # If we do have a poetry.lock, we use a poetry based workflow
       # See README.md for more information on what is supported
     - name: Setup python
