@@ -94,6 +94,12 @@ runs:
         # Commit the bumped project version with a non-semver chore: commit message
         git add pyproject.toml
         git --no-pager diff --staged
+
+        #if there is no change in the version, exit with a warning
+        if [[ $(git diff --staged) == "" ]]; then
+          echo "::warning::No changes in version bump, exiting."
+          exit 0
+        fi
         git commit --author="${{ inputs.git-user-name }} <${{ inputs.git-user-email }}>" -m "chore: release ${{ steps.version.outputs.new_release_version }}" -m "[skip actions]"
 
         # Push the changes to the current (should be main) branch, if this is not a dry-run
