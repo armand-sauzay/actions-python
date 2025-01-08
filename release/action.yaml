@@ -52,14 +52,14 @@ runs:
     - name: Setup python
       # this will use by default the .python-version of your repo
       if: hashFiles('poetry.lock') != ''
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         cache: "poetry"
         python-version: ${{ inputs.python-version }}
     - name: Setup python
       # this will use by default the .python-version of your repo
       if: hashFiles('poetry.lock') == ''
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ inputs.python-version }}
     - name: Version
