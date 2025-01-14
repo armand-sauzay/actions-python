@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Install poetry
         run: pipx install poetry
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: pre-commit/action@v3.0.0
 
   test:
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Add relevant python context to test action.
         run: |
           mkdir xxx
@@ -74,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Semantic release
         id: release
         uses: cycjimmy/semantic-release-action@v3
@@ -93,7 +93,7 @@ jobs:
     name: Publish docs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
         with:
           python-version: 3.x
